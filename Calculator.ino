@@ -1,9 +1,9 @@
 #include <LiquidCrystal.h>
 #include <Keypad.h>
 
+LiquidCrystal lcd(0, 1, 2, 3, 4, 5);
 const byte ROWS = 4;
 const byte COLS = 4;
-LiquidCrystal lcd(0, 1, 2, 3, 4, 5);
 
 char keys[ROWS][COLS] = {
     {'1', '2', '3', '+'},
@@ -27,7 +27,7 @@ void setup()
 {
   lcd.begin(16, 2);
   lcd.setCursor(0, 0);
-  lcd.print("      4x4");
+  lcd.print("       4x4");
   lcd.setCursor(0, 1);
   lcd.print("   Calculator");
   delay(2500);
@@ -37,6 +37,7 @@ void setup()
 void loop()
 {
   char key = myKeypad.getKey();
+
   if (key != NO_KEY && (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9'))
   {
     if (presentValue != true)
@@ -55,22 +56,25 @@ void loop()
       final = true;
     }
   }
-  else if (decimal1 == false && key != NO_KEY && key == '.')
+
+  else if (decimal1 == false && final == false && key != NO_KEY && key == '.')
   {
     n1 = n1 + nd1;
     int numLength = n1.length();
     lcd.setCursor(15 - numLength, 0);
     lcd.print(n1);
-    decimal1=true;
+    decimal1 = true;
   }
-  else if (decimal2 == false && key != NO_KEY && key == '.')
+
+  else if (decimal2 == false && final == true && key != NO_KEY && key == '.')
   {
     n2 = n2 + nd2;
     int numLength = n2.length();
     lcd.setCursor(15 - numLength, 1);
     lcd.print(n2);
-    decimal2=true;
+    decimal2 = true;
   }
+
   else if (presentValue == false && key != NO_KEY && (key == '/' || key == '*' || key == '-' || key == '+'))
   {
     if (presentValue == false)
@@ -81,6 +85,7 @@ void loop()
       lcd.print(op);
     }
   }
+
   else if (final == true && key != NO_KEY && key == '=')
   {
     if (op == '+')
