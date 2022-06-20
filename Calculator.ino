@@ -77,6 +77,11 @@ void loop() {
         int numLength = n1.length();
         lcd.setCursor(15 - numLength, 0);
         lcd.print(n1);
+    } else if (key != NO_KEY && key == '.') {
+        n2 = n2 + nd2;
+        int numLength = n2.length();
+        lcd.setCursor(15 - numLength, 1);
+        lcd.print(n2);
     } else if (presentValue == false && key != NO_KEY && (key == '/' || key == '*' || key == '-' || key == '+')) {
         if (presentValue == false) {
             presentValue = true;
