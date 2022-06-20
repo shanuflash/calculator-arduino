@@ -17,6 +17,7 @@ Keypad myKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 boolean presentValue = false;
 boolean final = false;
+boolean hasdecimal = false;
 boolean decimal1 = false, decimal2 = false;
 String n1, n2, d = ".";
 float answer;
@@ -90,23 +91,50 @@ void loop()
     if (op == '+')
     {
       answer = n1.toFloat() + n2.toFloat();
+      int answerint=int(answer);
+      if(answer-answerint != 0.00)
+      {
+        hasdecimal = true;
+      }
     }
     else if (op == '-')
     {
       answer = n1.toFloat() - n2.toFloat();
+      int answerint=int(answer);
+      if(answer-answerint != 0.00)
+      {
+        hasdecimal = true;
+      }
     }
     else if (op == '*')
     {
       answer = n1.toFloat() * n2.toFloat();
+      int answerint=int(answer);
+      if(answer-answerint != 0.00)
+      {
+        hasdecimal = true;
+      }
     }
     else if (op == '/')
     {
       answer = n1.toFloat() / n2.toFloat();
+      int answerint=int(answer);
+      if(answer-answerint != 0.00)
+      {
+        hasdecimal = true;
+      }
     }
+    
     lcd.clear();
     lcd.setCursor(15, 0);
     lcd.autoscroll();
-    lcd.print(answer);
+    if(hasdecimal != true)
+    {
+      int answerint=int(answer);
+      lcd.print(answerint);
+    }
+    else
+      lcd.print(answer);
     lcd.noAutoscroll();
   }
   else if (key != NO_KEY && key == 'C')
