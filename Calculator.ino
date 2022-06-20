@@ -16,10 +16,9 @@ byte colPins[COLS] = {9, 8, 7, 6};
 Keypad myKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 boolean presentValue = false;
-boolean next = false;
 boolean final = false;
 boolean decimal1 = false, decimal2 = false;
-String n1, n2, nd1 = ".", nd2 = ".";
+String n1, n2, d = ".";
 float answer;
 char op;
 
@@ -59,7 +58,7 @@ void loop()
 
   else if (decimal1 == false && final == false && key != NO_KEY && key == '.')
   {
-    n1 = n1 + nd1;
+    n1 = n1 + d;
     int numLength = n1.length();
     lcd.setCursor(15 - numLength, 0);
     lcd.print(n1);
@@ -68,7 +67,7 @@ void loop()
 
   else if (decimal2 == false && final == true && key != NO_KEY && key == '.')
   {
-    n2 = n2 + nd2;
+    n2 = n2 + d;
     int numLength = n2.length();
     lcd.setCursor(15 - numLength, 1);
     lcd.print(n2);
@@ -115,6 +114,8 @@ void loop()
     lcd.clear();
     presentValue = false;
     final = false;
+    decimal1 = false;
+    decimal2 = false;
     n1 = "";
     n2 = "";
     answer = 0;
