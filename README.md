@@ -1,1 +1,1 @@
-# arduino-simplecalc
+# Simple Calculator using arduino
