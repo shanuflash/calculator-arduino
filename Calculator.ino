@@ -1,6 +1,6 @@
-#include < LiquidCrystal.h > #include < Keypad.h > LiquidCrystal lcd(0, 1, 2, 3, 4, 5);
-const byte ROWS = 4;
+#include < LiquidCrystal.h > #include < Keypad.h > const byte ROWS = 4;
 const byte COLS = 4;
+LiquidCrystal lcd(0, 1, 2, 3, 4, 5);
 
 char keys[ROWS][COLS] = {
     {
@@ -20,7 +20,7 @@ char keys[ROWS][COLS] = {
         '*'
     }, {
         'C',
-        '0',
+        '.',
         '=',
         '/'
     }
@@ -43,7 +43,7 @@ Keypad myKeypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 boolean presentValue = false;
 boolean next = false;
 boolean final = false;
-String num1, num2;
+String n1, n2, nd1 = ".", nd2 = ".";
 int answer;
 char op;
 
@@ -59,7 +59,7 @@ void setup() {
 
 void loop() {
     char key = myKeypad.getKey();
-    if (key != NO_KEY && (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0')) {
+    if (key != NO_KEY && (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '.')) {
         if (presentValue != true) {
             num1 = num1 + key;
             int numLength = num1.length();
@@ -72,6 +72,11 @@ void loop() {
             lcd.print(num2);
             final = true;
         }
+    } else if (key != NO_KEY && key == '.') {
+        n1 = n1 + nd1;
+        int numLength = n1.length();
+        lcd.setCursor(15 - numLength, 0);
+        lcd.print(n1);
     } else if (presentValue == false && key != NO_KEY && (key == '/' || key == '*' || key == '-' || key == '+')) {
         if (presentValue == false) {
             presentValue = true;
