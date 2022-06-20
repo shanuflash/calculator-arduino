@@ -20,7 +20,7 @@ boolean next = false;
 boolean final = false;
 boolean decimal1 = false, decimal2 = false;
 String n1, n2, nd1 = ".", nd2 = ".";
-int answer;
+float answer;
 char op;
 
 void setup()
@@ -85,19 +85,19 @@ void loop()
   {
     if (op == '+')
     {
-      answer = n1.toInt() + n2.toInt();
+      answer = n1.toFloat() + n2.toFloat();
     }
     else if (op == '-')
     {
-      answer = n1.toInt() - n2.toInt();
+      answer = n1.toFloat() - n2.toFloat();
     }
     else if (op == '*')
     {
-      answer = n1.toInt() * n2.toInt();
+      answer = n1.toFloat() * n2.toFloat();
     }
     else if (op == '/')
     {
-      answer = n1.toInt() / n2.toInt();
+      answer = n1.toFloat() / n2.toFloat();
     }
     lcd.clear();
     lcd.setCursor(15, 0);
