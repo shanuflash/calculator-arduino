@@ -144,6 +144,7 @@ void loop()
     final = false;
     decimal1 = false;
     decimal2 = false;
+    hasdecimal = false;
     n1 = "";
     n2 = "";
     answer = 0;
